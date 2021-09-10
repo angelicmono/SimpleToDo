@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         items.add("Go to the gym");
         items.add("have fun!");
 
-        final ItemsAdapter itemsAdapter = new ItemsAdapter(items);
+        ItemsAdapter itemsAdapter = new ItemsAdapter(items);
         rvItems.setAdapter(itemsAdapter);
         rvItems.setLayoutManager(new LinearLayoutManager(this));
 

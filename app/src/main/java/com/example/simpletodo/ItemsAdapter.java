@@ -55,6 +55,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
         }
         //Update the view inside the view holder with this data
         public void bind(String item) {
+            tvItems.setText(item);
 
         }
     }
