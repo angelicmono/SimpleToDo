@@ -1,11 +1,14 @@
 package com.example.simpletodo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     EditText etItem;
     RecyclerView rvItems;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,11 +31,24 @@ public class MainActivity extends AppCompatActivity {
         etItem = findViewById(R.id.etItem);
         rvItems = findViewById(R.id.rvItems);
 
-        etItem.setText("Java");
-
         items = new ArrayList<>();
         items.add("Buy Milk");
         items.add("Go to the gym");
         items.add("have fun!");
+
+        final ItemsAdapter itemsAdapter = new ItemsAdapter(items);
+        rvItems.setAdapter(itemsAdapter);
+        rvItems.setLayoutManager(new LinearLayoutManager(this));
+
+        btnAdd.setOnClickListener(view -> {
+            String todoItem = etItem.getText().toString();
+            //Add item to the model
+            items.add(todoItem);
+            //Notify adapter that an item is inserted
+            itemsAdapter.notifyItemInserted(items.size()-1);
+            etItem.setText("");
+            Toast.makeText(getApplicationContext(), "Item was added", Toast.LENGTH_SHORT).show();
+        });
+
     }
 }
